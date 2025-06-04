@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HAPPY BIRTHDAY DAARLIIINNN! 🎂💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
+      overflow: hidden;
+      color: #fff;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-top: 60px;
+      animation: bounce 1s infinite alternate;
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-20px); }
+    }
+
+    #heartCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    #ballCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .btn {
+      position: relative;
+      z-index: 20;
+      background-color: #ff69b4;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border-radius: 30px;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s;
+      margin: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff0f5;
+      color: #ff1493;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      z-index: 10;
+      font-size: 1.2rem;
+      animation: fadein 1s ease;
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; transform: scale(0.5); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .emoji {
+      font-size: 2rem;
+      animation: spin 3s linear infinite;
+      display: inline-block;
+      margin-top: 20px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="heartCanvas"></canvas>
+<canvas id="ballCanvas"></canvas>
+
+<h1>🎉 HAAAPPPYYY BIRTHDAAYYYYY BWENWDWAAA//BENEE 💕</h1>
+<p class="emoji">🎂🎈🥰🎁💝</p>
+
+<button class="btn" onclick="showPopup()">Click Meeee ♡⸜(˶˃ ᵕ ˂˶)⸝♡</button>
+
+<div class="popup" id="popup">
+  <h2>Mas kangennn...</h2>
+  <p>Mas cuma mau bilang<br><br>
+    Mas pengen banget ketemu sama kasih kamu hadiah, tapi kayanya kamu sibuk ˙◠˙ jadi mas bikinin ini dehh, oiyaaa semogaa kamu panjang umur trus dipermudah jalan hidup nyaa, dijauhkan dari segalaaa macam bahaya (soalnya kamu jauh gabisa mas jagain) semoga semakin dewasa dan menjadi pribadi yang lebih baik lagiii. kemanapun kamu pergi, jalan mana yang kamu tempuh... mas usahain bakal selalu sama kamu💞<br>
+     Semoga mas juga bisa liat kamu tumbuh terus yaaa biar kita tumbuh sama sama<br>
+     I love you in every universe</p>
+  <p>I Love you 3000! 💕💞💓💗</p>
+</div>
+
+<div class="popup" id="questionPopup">
+  <h3>Would you stay with me forever?? <br>
+  ( ∩´ ᐜ `∩)♡</h3>
+  <button class="btn" onclick="movePopup()">Nuh uhh</button>
+  <button class="btn" onclick="showFunnyPopup()">OF COOUURRSSEE</button>
+</div>
+
+<div class="popup" id="funnyPopup">
+  <h3>MEE WIFEEE</h3>
+  <p>i love you bebeeyyyy<br>
+     mwa mwa mwa mwa mwa <br>
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠤⠀⠀⠀⠚⠉⠀⣀⣀⡀⠈⠑⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠞⠁⢀⡠⢤⣄⡀⣴⡿⡷⢤⣿⢦⠀⠸⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡎⠀⢰⣿⠋⠉⠙⠻⠋⠀⠧⠼⠋⣾⡄⠀⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⢻⢧⠀⠀⠀⠀⠀⠀⠀⠀⡼⡼⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠱⡀⠈⠣⣓⢤⣀⡀⠀⠀⢀⣞⡽⠁⠀⠀⠀⣀⣀⡀⠀⠀⣀⣀⣀⣀⠀⠈⢦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠑⢄⡀⠈⠙⠒⠯⠭⣓⣫⠞⠀⠀⠀⡴⣫⠔⠒⠺⢷⣮⣷⠶⣝⢦⣳⠀⠘⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⡩⠷⠦⠀⠀⢀⣠⣤⣤⣀⠀⢰⠁⡇⠀⠀⠀⠀⢙⣥⣶⠾⠶⣾⣄⠀⠙⠂⠀⠀⠀⠀⠀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⡠⠔⠊⠉⠀⣀⣀⣤⣤⣴⣿⣭⣅⣉⠙⢷⡌⢧⢳⡀⠀⠀⢠⣿⠋⠀⢀⣀⣈⣿⣦⣤⣤⣤⣤⣤⣄⣀⠀⠉⠓⠢⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⡤⠒⠉⠀⣀⣴⠶⠟⠛⠉⠉⠉⠉⠉⠉⠉⠛⠿⣾⣿⡈⠳⣝⣦⣀⣿⡇⣠⣼⡿⠛⠋⠉⠀⠀⠀⠀⠀⠈⠉⠙⠻⢶⣤⡀⠀⠑⢦⡀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⡰⠋⠀⣠⣴⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣦⡀⠉⠛⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣦⣄⠀⠙⢄⠀⠀⠀⠀⠀⠀
+⠠⠔⠊⠉⠀⢀⣾⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣿⣤⣴⡿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣧⡀⠈⢧⠀⠀⠀⠀⠀
+⠀⢀⣴⡶⠷⠾⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣴⠄⡤⠊⠻⣧⠀⢶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣷⡀⠀⠉⠈⠉⠢⣄
+⢠⣿⠃⠀⢀⣀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠀⣿⠋⠀⢸⠀⠀⠀⢻⡇⠀⢹⡆⠀⣶⣶⠀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⠟⠛⢷⣦⠀⠈
+⢸⡏⠀⢰⣏⢹⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠛⢿⣀⣴⣆⠀⠘⢆⡀⠀⢸⡇⠀⠈⣿⠀⠛⡿⠋⠱⣦⣄⠹⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣧⣄⠀⢹⣧⠀
+⢸⣷⡀⠀⠙⠿⠇⠀⠀⠀⠀⠀⠀⠀⢠⣶⡿⠛⠛⠀⣴⣴⠾⠉⠁⢹⡆⠀⠀⠉⠁⣾⠇⠀⢀⡟⠀⡼⠁⠀⣴⠏⠈⠀⡇⣶⣶⡄⠀⠀⠀⡴⣄⠀⠀⢸⣇⣿⠀⢨⣿⠀
+⠀⠙⢿⣦⣤⣤⣤⡴⠀⠀⠀⠀⠀⠀⢈⠵⠒⠢⢄⠀⠸⣧⠀⠀⠀⢸⡇⠀⠀⠀⣼⡟⠀⠀⠸⠃⠀⡇⠺⠛⣧⠀⢀⡼⠀⠙⠉⠀⠀⠀⢸⡁⣼⠀⠀⣸⡏⢁⣠⣾⠏⠀
+⠠⣀⠀⠘⣿⡅⠀⠀⠀⠀⠀⠀⠀⢠⠃⠀⠀⠀⠀⢳⠀⠘⠷⣧⣤⡾⠁⠀⢀⣾⣿⡀⠀⠀⠀⠀⠀⠙⠦⣤⡭⠴⠋⠀⠀⠀⠀⠀⠀⠀⠀⠉⠁⠀⢠⣿⠟⠛⠛⠁⠀⡀
+⠀⠈⢆⠀⠹⣿⣄⠀⠀⠀⠀⠀⠀⠘⢆⠀⠀⠀⢀⠞⠀⠀⠀⠀⠀⠀⢀⣠⣿⣯⣿⣷⣶⣶⣦⣤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⠃⠀⣠⠤⠒⠋⠀
+⠀⠀⠈⢆⠀⠘⢿⣦⣄⠀⠀⠀⠀⠀⠀⠉⠒⠊⠉⠀⠀⠀⠀⢠⠶⠛⠛⠋⠉⠁⠀⠀⠀⠀⠀⠨⠿⢿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⡿⠃⠀⡰⠁⠀⠀⠀⠀
+⠀⠀⠀⠀⠳⣄⠀⠉⠛⠿⣷⣶⣤⣄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠰⢾⣿⠀⢀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣴⣾⠟⠁⢀⡜⠁⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠈⠑⠢⠤⣀⡀⠈⠉⢹⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣠⣴⡿⠃⠀⠈⠙⢻⣿⣿⠿⠿⠿⠛⠛⠋⠀⢀⡤⠊⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⡔⠃⠀⣀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢾⡿⢿⠿⠟⠛⠛⠉⠁⣰⠀⠀⠀⠀⠀⠘⣷⠀⠀⡀⠀⠀⠒⠊⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⡼⠀⢠⣾⠟⠉⠛⠷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣷⠁⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⠀⠀⠀⣿⡆⠀⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⢻⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⡇⠀⠀⠀⠀⠀⠀⣾⣿⠀⠀⠀⠀⠀⠀⢻⣇⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢸⡀⠈⢻⣷⣤⡤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣟⡀⠀⠀⠀⠀⠀⠀⢹⣿⡆⠀⠀⠀⠀⠀⢸⣿⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⡜⠀⢀⣾⠋⠀⠀⠀⢀⣴⠀⠀⠀⠀⠀⠀⣰⡿⠛⠙⣿⠻⠄⠀⢠⣦⠀⠀⠈⢟⣿⣦⣶⠀⢶⣠⣿⠃⠀⡸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢠⠇⠀⣾⠃⠀⠀⠀⠐⣸⠏⠀⠀⠀⠀⠀⢠⣿⠁⠀⠈⣿⠀⠀⠀⠈⢿⡆⠀⠀⠀⠙⠻⠛⠿⣿⡟⠁⢀⡴⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠘⡆⠀⢿⣦⣤⣤⣤⣤⣿⣤⣤⣤⣤⣤⣼⣼⡏⠀⠀⠠⣿⣤⣷⣤⣤⣼⣧⣦⣤⣶⣤⣤⣤⣤⣿⠃⠀⡎⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠳⣄⡀⠀⠉⠈⠉⠉⠉⠉⠉⠉⠉⠉⠉⠁⠀⣠⢤⡀⠀⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠀⢀⡼⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</p>
+</div>
+
+<script>
+  // Popup functions
+  function showPopup() {
+  const popup = document.getElementById("popup");
+  popup.style.display = "block";
+
+  // Sembunyikan button yang pertama setelah klik
+  document.querySelector('.btn').style.display = 'none';
+
+  setTimeout(() => {
+    if (!document.getElementById("askButton")) {
+      const btn2 = document.createElement("button");
+      btn2.textContent = "NOW CLICK MEE ₍^ >ヮ<^₎ .ᐟ.ᐟ";
+      btn2.className = "btn";
+      btn2.id = "askButton";
+      btn2.onclick = showQuestion;
+      popup.appendChild(btn2);
+    }
+  }, 13000);
+}
+
+
+  function showQuestion() {
+    const popup = document.getElementById("questionPopup");
+    popup.style.display = "block";
+    popup.style.top = "50%";
+    popup.style.left = "50%";
+    popup.style.transform = "translate(-50%, -50%)";
+  }
+
+  function movePopup() {
+    const popup = document.getElementById("questionPopup");
+    const maxWidth = window.innerWidth - popup.offsetWidth;
+    const maxHeight = window.innerHeight - popup.offsetHeight;
+
+    const randomX = Math.max(10, Math.random() * maxWidth);
+    const randomY = Math.max(10, Math.random() * maxHeight);
+
+    popup.style.left = `${randomX}px`;
+    popup.style.top = `${randomY}px`;
+    popup.style.transform = "translate(0, 0)";
+  }
+
+  function showFunnyPopup() {
+    const funny = document.getElementById("funnyPopup");
+    funny.style.left = "50%";
+    funny.style.top = "50%";
+    funny.style.transform = "translate(-50%, -50%)";
+    funny.style.display = "block";
+  }
+
+  // Canvas and animations setup
+  const heartCanvas = document.getElementById('heartCanvas');
+  const heartCtx = heartCanvas.getContext('2d');
+  heartCanvas.width = window.innerWidth;
+  heartCanvas.height = window.innerHeight;
+
+  let hearts = [];
+
+  function createHeart() {
+    const x = Math.random() * heartCanvas.width;
+    const y = heartCanvas.height + 20;
+    const size = Math.random() * 10 + 10;
+    const speed = Math.random() * 1 + 0.5;
+    hearts.push({ x, y, size, speed });
+  }
+
+  function drawHearts() {
+    heartCtx.clearRect(0, 0, heartCanvas.width, heartCanvas.height);
+    for (let i = 0; i < hearts.length; i++) {
+      const h = hearts[i];
+      heartCtx.beginPath();
+      heartCtx.fillStyle = "pink";
+      heartCtx.moveTo(h.x, h.y);
+      heartCtx.bezierCurveTo(h.x + h.size/2, h.y - h.size,
+                        h.x + h.size*2, h.y + h.size/2,
+                        h.x, h.y + h.size*2);
+      heartCtx.bezierCurveTo(h.x - h.size*2, h.y + h.size/2,
+                        h.x - h.size/2, h.y - h.size,
+                        h.x, h.y);
+      heartCtx.fill();
+      h.y -= h.speed;
+      if (h.y < -20) {
+        hearts.splice(i, 1);
+        i--;
+      }
+    }
+  }
+
+  function animateHearts() {
+    drawHearts();
+    requestAnimationFrame(animateHearts);
+  }
+
+  setInterval(createHeart, 200);
+  animateHearts();
+
+  // Ball canvas
+  const ballCanvas = document.getElementById("ballCanvas");
+  const ballCtx = ballCanvas.getContext("2d");
+  ballCanvas.width = window.innerWidth;
+  ballCanvas.height = window.innerHeight;
+
+  const imageSources = [
+    "brenda1.jpeg", "brenda2.jpeg", "brenda3.jpeg", "brenda4.jpeg", "brenda5.jpeg",
+    "brenda6.jpeg", "brenda7.jpeg", "brenda8.jpeg", "brenda9.jpeg", "brenda10.jpeg", 
+    "brenda11.jpeg", "brenda12.jpeg", "brenda13.jpeg", "brenda14.jpeg", "brenda15.jpeg",
+    "brenda16.jpeg"
+  ];
+
+  const loadedImages = [];
+  let imagesLoaded = 0;
+  const balls = [];
+
+  class Ball {
+    constructor(x, y, dx, dy, radius, image) {
+      this.x = x;
+      this.y = y;
+      this.dx = dx;
+      this.dy = dy;
+      this.radius = radius;
+      this.image = image;
+    }
+
+    draw() {
+      ballCtx.save();
+      ballCtx.beginPath();
+      ballCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ballCtx.closePath();
+      ballCtx.clip();
+
+      ballCtx.drawImage(this.image, this.x - this.radius, this.y - this.radius, this.radius * 2, this.radius * 2);
+
+      ballCtx.restore();
+    }
+
+    update() {
+      if (this.x + this.radius > ballCanvas.width || this.x - this.radius < 0) {
+        this.dx = -this.dx;
+      }
+      if (this.y + this.radius > ballCanvas.height || this.y - this.radius < 0) {
+        this.dy = -this.dy;
+      }
+      this.x += this.dx;
+      this.y += this.dy;
+
+      this.draw();
+    }
+  }
+
+  // Load images and start animation
+  imageSources.forEach((src, index) => {
+    const img = new Image();
+    img.src = src;
+    img.onload = () => {
+      loadedImages[index] = img;
+      imagesLoaded++;
+      if (imagesLoaded === imageSources.length) {
+        console.log("Semua gambar dimuat.");
+        startBouncingBalls();
+      }
+    };
+    img.onerror = () => {
+      console.error("Gagal memuat gambar:", src);
+      imagesLoaded++;
+      if (imagesLoaded === imageSources.length) {
+        console.log("Load gambar selesai dengan error.");
+        startBouncingBalls();
+      }
+    };
+  });
+
+  function startBouncingBalls() {
+    if (balls.length > 0) return; // Jangan buat ulang jika sudah ada
+
+    for (let i = 0; i < loadedImages.length; i++) {
+      const radius = 40;
+      const x = Math.random() * (ballCanvas.width - 2 * radius) + radius;
+      const y = Math.random() * (ballCanvas.height - 2 * radius) + radius;
+      const dx = (Math.random() - 0.5) * 5;
+      const dy = (Math.random() - 0.5) * 5;
+      balls.push(new Ball(x, y, dx, dy, radius, loadedImages[i]));
+    }
+
+    animateBalls();
+  }
+
+  function animateBalls() {
+    ballCtx.clearRect(0, 0, ballCanvas.width, ballCanvas.height);
+    balls.forEach(ball => ball.update());
+    requestAnimationFrame(animateBalls);
+  }
+
+  // Resize handler
+  window.addEventListener("resize", () => {
+    heartCanvas.width = window.innerWidth;
+    heartCanvas.height = window.innerHeight;
+
+    ballCanvas.width = window.innerWidth;
+    ballCanvas.height = window.innerHeight;
+  });
+
+</script>
+
+</body>
+</html>
